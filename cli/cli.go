@@ -74,6 +74,15 @@ func before(c *cli.Context) error {
 		configs.IsCIMode = true
 	}
 
+	// Check silent mode
+	if c.Bool(SilentKey) {
+		// if silent mode is enabled will disable all logs from bitrise
+		if err := os.Setenv(configs.SilentModeEnvKey, "true"); err != nil {
+			log.Fatalf("Failed to set silent env, error: %s", err)
+		}
+		configs.IsSilentMode = true
+	}
+
 	if err := configs.InitPaths(); err != nil {
 		log.Fatalf("Failed to initialize required paths, error: %s", err)
 	}

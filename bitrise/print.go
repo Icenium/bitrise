@@ -6,6 +6,7 @@ import (
 	"time"
 	"unicode/utf8"
 
+	"github.com/bitrise-io/bitrise/configs"
 	"github.com/bitrise-io/bitrise/models"
 	"github.com/bitrise-io/bitrise/toolkits"
 	"github.com/bitrise-io/go-utils/colorstring"
@@ -518,6 +519,10 @@ func getRunningStepFooterSubSection(stepRunResult models.StepRunResultsModel) st
 
 // PrintRunningStepHeader ...
 func PrintRunningStepHeader(stepInfo stepmanModels.StepInfoModel, step stepmanModels.StepModel, idx int) {
+	if configs.IsSilentMode {
+		return
+	}
+
 	sep := fmt.Sprintf("+%s+", strings.Repeat("-", stepRunSummaryBoxWidthInChars-2))
 
 	fmt.Println(sep)
@@ -530,6 +535,10 @@ func PrintRunningStepHeader(stepInfo stepmanModels.StepInfoModel, step stepmanMo
 
 // PrintRunningStepFooter ..
 func PrintRunningStepFooter(stepRunResult models.StepRunResultsModel, isLastStepInWorkflow bool) {
+	if configs.IsSilentMode {
+		return
+	}
+
 	iconBoxWidth := len("   ")
 	timeBoxWidth := len(" time (s) ")
 	titleBoxWidth := stepRunSummaryBoxWidthInChars - 4 - iconBoxWidth - timeBoxWidth
@@ -557,6 +566,10 @@ func PrintRunningStepFooter(stepRunResult models.StepRunResultsModel, isLastStep
 
 // PrintRunningWorkflow ...
 func PrintRunningWorkflow(title string) {
+	if configs.IsSilentMode {
+		return
+	}
+
 	fmt.Println()
 	log.Printf("%s %s", colorstring.Blue("Switching to workflow:"), title)
 	fmt.Println()
@@ -564,6 +577,10 @@ func PrintRunningWorkflow(title string) {
 
 // PrintSummary ...
 func PrintSummary(buildRunResults models.BuildRunResultsModel) {
+	if configs.IsSilentMode {
+		return
+	}
+
 	iconBoxWidth := len("   ")
 	timeBoxWidth := len(" time (s) ")
 	titleBoxWidth := stepRunSummaryBoxWidthInChars - 4 - iconBoxWidth - timeBoxWidth
