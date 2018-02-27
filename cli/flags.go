@@ -10,6 +10,8 @@ const (
 	CollectionPathEnvKey = "STEPMAN_COLLECTION"
 	// CIKey ...
 	CIKey = "ci"
+	// SilentKey ...
+	SilentKey = "silent"
 	// PRKey ...
 	PRKey = "pr"
 	// DebugModeKey ...
@@ -93,6 +95,11 @@ var (
 		Usage:  "If true it indicates that we're used by another tool so don't require any user input!",
 		EnvVar: configs.CIModeEnvKey,
 	}
+	flSilent = cli.BoolFlag{
+		Name:   SilentKey,
+		Usage:  "If true it will disable all logs from bitrise cli!",
+		EnvVar: configs.SilentModeEnvKey,
+	}
 	flPRMode = cli.BoolFlag{
 		Name:  PRKey,
 		Usage: "If true bitrise runs in pull request mode.",
@@ -101,6 +108,7 @@ var (
 		flLogLevel,
 		flDebugMode,
 		flTool,
+		flSilent,
 		flPRMode,
 	}
 	// Command flags

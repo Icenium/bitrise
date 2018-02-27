@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/bitrise-io/bitrise/bitrise"
+	"github.com/bitrise-io/bitrise/configs"
 	"github.com/bitrise-io/go-utils/log"
 	"github.com/urfave/cli"
 )
@@ -33,6 +34,10 @@ var setupCommand = cli.Command{
 
 // PrintBitriseHeaderASCIIArt ...
 func PrintBitriseHeaderASCIIArt(appVersion string) {
+	if configs.IsSilentMode {
+		return
+	}
+
 	// generated here: http://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=Bitrise
 	fmt.Println(`
   ██████╗ ██╗████████╗██████╗ ██╗███████╗███████╗
